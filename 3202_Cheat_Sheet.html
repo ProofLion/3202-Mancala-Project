@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Mancala Project Cheat Sheet</title>
+  <style>body{font-family:Arial,Helvetica,sans-serif;line-height:1.4;padding:20px;max-width:900px}h1{font-size:20px}h2{font-size:16px}code{background:#f2f2f2;padding:2px 4px;border-radius:3px}</style>
+</head>
+<body>
+<h1>CSCI 3202 — Mancala Project Cheat Sheet</h1>
+<p><strong>Notebook:</strong> 3202_Mancala_Project.ipynb</p>
+
+<h2>Summary</h2>
+<ul>
+<li><code>random.seed(109)</code> (cell 9). Random moves: <code>random_move_generator()</code> (cell 11).</li>
+<li><code>class Mancala:</code> (cell 10).</li>
+<li>100-game random-vs-random: <code>simulate_games()</code> (cell 24) and runner (cell 25). Example: P1=51, P2=40, Ties=9, Avg turns ≈43.58.</li>
+<li>Minimax: <code>clone_game()</code> (cell 28), <code>minimax_value</code> and <code>minimax_best_move</code> (cell 30). Simulation harness (cells 31–32).</li>
+<li>Alpha-Beta: <code>alpha_beta_value</code> and <code>alpha_beta_best_move</code> (cell 36). Timed harness and 5/10-ply runs (cells 38–41).</li>
+<li>Extra utility: <code>utility_v2</code> and <code>alpha_beta_best_move_custom</code> with <code>simulate_ab_custom</code> (cell 47).</li>
+<li>Interview demo runner: <code>demo_single_game()</code> (cell 51) — runs 2-ply/4-ply demos.</li>
+</ul>
+
+<h2>Practice Answers</h2>
+<ul>
+<li><strong>Random moves:</strong> collect non-empty pits and use <code>random.choice()</code>; seeded for reproducibility.</li>
+<li><strong>State tree:</strong> implicit on recursion stack; children are clones via <code>clone_game()</code>.</li>
+<li><strong>Best move:</strong> try each legal move, clone/apply, evaluate recursively, pick highest backed-up utility.</li>
+<li><strong>Utility:</strong> original = mancala diff; v2 adds 0.5× side-stone diff to reward mid-game strength.</li>
+<li><strong>Why deeper plies:</strong> see captures/sweeps; cost grows ~branching^depth (≈6^d).</li>
+<li><strong>Minimax vs Alpha-Beta:</strong> same decisions for fixed depth; alpha-beta prunes and runs much faster.</li>
+</ul>
+
+<h2>Rubric Checklist & What to Show</h2>
+<ul>
+<li>Intermediate report: show cells 24–25 (random sim output).</li>
+<li>Minimax: show clone/minimax cells (28–32), run 2-ply demo live.</li>
+<li>Alpha-Beta: show alpha-beta cells (36–41) and timing comparison.</li>
+<li>Extra credit: show <code>utility_v2</code> and comparison harness (cell 47).</li>
+</ul>
+
+<h2>Quick Run Commands</h2>
+<pre><code>demo_single_game(minimax_best_move, depth=2, label="Minimax demo")
+
+demo_single_game(alpha_beta_best_move, depth=4, label="Alpha-Beta demo")</code></pre>
+
+<h2>Numbers to Quote</h2>
+<ul>
+<li>Example random-vs-random: P1=51, P2=40, Ties=9, Avg turns ≈43.58.</li>
+<li>Branching ≈6 → nodes ~6^d; 5→10 multiplies by ~6^5 ≈ 7776.</li>
+</ul>
+
+<h2>Convert to PDF</h2>
+<p>Open this HTML in a browser and Print → Save as PDF, or convert the Markdown with Pandoc:</p>
+<pre><code>pandoc 3202_Cheat_Sheet.md -o 3202_Cheat_Sheet.pdf</code></pre>
+
+</body>
+</html>
